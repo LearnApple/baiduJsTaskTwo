@@ -28,27 +28,27 @@ var aqiData = [
   遍历读取aqiData中各个城市的数据
   将空气质量指数大于60的城市显示到aqi-list的列表中
   */
-  var msg = "";
-  var count = 1;
-  for (var i = 0; i < aqiData.length; i++) {
-    if(aqiData[i][1] > 60){
+  var arr1 = aqiData.filter(function(item){
+    if(item[1] > 60)
+    {
+      return item;
+    }
+  });
+  console.log(arr1);
+  arr1.sort(function(a,b){
+    return b[1] - a[1];
+  });
+  console.log(arr1[2]);
 
-      msg += "<li>第"+count+"名:"+aqiData[i][0]+","+aqiData[i][1]+"</li>";
-      count += 1;
+  var arr2 = ["一","二","三","四"];
+  var msg = "";
+  for (var i = 0; i < arr1.length; i++) {
+    if(arr1[i][1] > 60){
+      msg += "<li>第"+arr2[i]+"名:"+arr1[i][0]+","+arr1[i][1]+"</li>";
     }
   }
   var list = document.getElementById("aqi-list");
   list.innerHTML = msg;
-  /*var msg = aqiData.reduce(function(pre,cur,index,array){
-    if(cur[1] > 60){
-      return pre +=  `<li>第${index+1}名:`+cur[0]+","+cur[1]+"</li>";
-    }else{
-      return pre;
-    }
-  },"");
-  var list = document.getElementById("aqi-list");
-  list.innerHTML = msg;*/
-
 })();
 
 </script>
